@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    description: "Raw data from the Olist e-commerce dataset ingested via Python."
+    # This tells dbt the source is in our main postgres db
+    database: "{{ env_var('POSTGRES_DB') }}"
+    schema: raw
+    tables:
+      - name: customers
+        description: "Raw customer data."
+      - name: orders
+        description: "Raw order data."
+      - name: order_items
+        description: "Raw order item data."
+      # Add the rest of your raw tables here following the same pattern
+      - name: order_payments
+      - name: order_reviews
+      - name: products
+      - name: sellers
+      - name: geolocation
+      - name: marketing_qualified_leads
+      - name: closed_deals

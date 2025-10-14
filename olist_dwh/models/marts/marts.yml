@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "A central fact table containing all order line items. One row represents one product in an order."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - order_item_id
+    columns:
+      - name: order_item_id
+        description: "The sequential identifier for a line item within an order (e.g., 1, 2, 3). Not globally unique."
+        tests:
+          - not_null
+          # We removed the 'unique' test from here
+
+      - name: order_id
+        description: "The foreign key to the orders table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+      - name: product_id
+        description: "The foreign key to the products table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
