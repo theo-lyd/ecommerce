@@ -21,3 +21,4 @@ sources:
       - name: geolocation
       - name: marketing_qualified_leads
       - name: closed_deals
+      - name: product_category_name_translation
